@@ -108,9 +108,16 @@ print(f"R² for Random Forest Regressor = {rf_r2}")
 print('-'*30)
 
 # Create Timestamp column
-historical_df = historical_df.withColumn('Timestamp', concat(col("Date"), lit(" "), col("Time")))
+historical_df = historical_df.withColumn('timestamp', concat(col("Date"), lit(" "), col("Time")))
 historical_df = historical_df.drop('Date')
 historical_df = historical_df.drop('Time')
+# Convert column names to lower case
+for coll in historical_df.columns:
+    if coll.lower()=="timestamp":
+        continue
+    else:
+        historical_df = historical_df.withColumn(coll, col(coll).cast("double"))
+    historical_df = historical_df.withColumnRenamed(coll, coll.lower())
 
 # Write dataset into bigquery
 historical_df.write.format("bigquery") \

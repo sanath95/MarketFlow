@@ -93,8 +93,9 @@ This architecture enables scalable, real-time data processing, storage, and tran
     - Give the "Dataset ID".
     - Select region "europe-west3" and click "Create dataset".
     - Click on the kebab menu button next to the dataset id and select "Create table".
-    - Give the table a name for gold prices.
-    - Create another table for bitcoin prices.
+    - Give the table a name for gold prices data.
+    - Create another table for bitcoin prices data.
+    - Create another table for DBT transformed data.
 
 8. **ETL for historical data**
 
@@ -183,7 +184,33 @@ This architecture enables scalable, real-time data processing, storage, and tran
 
 10. **Data Transformation using DBT**
 
-    TODO
+    Navigate to "Service Accounts" and create a new service account to connect BigQuery to DBT.
+    - Give the service account a name.
+    - Select "Owner" role and click "Done".
+    - Click on the new service account, go to "Keys" tab, "Add Key", "Create a new key", "JSON".
+    - Download the service account keys as a json file.
+
+    Visit [Get DBT](https://www.getdbt.com/) and create an account to get started.
+    - Create a new project.
+    - Create a new connection by providing the service account json file created above.
+    - Connect to a GitHub repository.
+    - Add / Update the following files:
+        - `dbt_project.yml`
+        - `models/modelflow/btc.sql`
+        - `models/modelflow/xau.sql`
+        - `models/modelflow/transformed_data.sql`
+    - Commit and push the changes.
+    - Navigate to "Deploy", and create an "Environment".
+    - Create a new "Job".
+    - Give the job a name.
+    - Select the Environment.
+    - Give the command
+
+        ```
+        dbt run --model transformed_data
+        ```
+    - Turn on Schedule for every hour.
+    - Create the job and run it.
 
 ---
 
@@ -199,12 +226,16 @@ This architecture enables scalable, real-time data processing, storage, and tran
 
     ![bitcoin sample](./assets/bitcoin_price_sample.png)
 
+    DBT Transformed Data
+
+    ![transformed sample](./assets/transformed_data_sample.png)
+
 2. Regression models on historical data:
     |Model| RMSE | R² |
     |---|---|---|
     |Linear Regression|2.42|0.99|
     |Random Forest Regressor|296.72|-2.05|
-    Linear Regression maybe overfit whereas the Random Forest Regressor is very underfit.
+    > Linear Regression maybe overfit whereas the Random Forest Regressor is very underfit.
 
 ---
 
@@ -221,7 +252,9 @@ This architecture enables scalable, real-time data processing, storage, and tran
 2. [Coinbase: Get product candles](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductcandles)
 3. [PySpark](https://spark.apache.org/docs/latest/api/python/index.html#:~:text=PySpark%20is%20the%20Python%20API,for%20interactively%20analyzing%20your%20data.)
 4. [Use the BigQuery connector with Spark](https://cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example)
-5. [ChatGPT](https://chatgpt.com/)
+5. [Workflow scheduling solutions](https://cloud.google.com/dataproc/docs/concepts/workflows/workflow-schedule-solutions)
+6. [DBT Documentation](https://docs.getdbt.com/docs/build/documentation)
+7. [ChatGPT](https://chatgpt.com/)
 
 ---
 
