@@ -224,3 +224,7 @@ This architecture enables scalable, real-time data processing, storage, and tran
 5. [ChatGPT](https://chatgpt.com/)
 
 ---
+
+> **Remember to stop and delete all resources after completion.**
+
+---
