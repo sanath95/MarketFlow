@@ -190,6 +190,28 @@ This architecture enables scalable, real-time data processing, storage, and tran
     - Click on the new service account, go to "Keys" tab, "Add Key", "Create a new key", "JSON".
     - Download the service account keys as a json file.
 
+    Visit [Get DBT](https://www.getdbt.com/) and create an account to get started.
+    - Create a new project.
+    - Create a new connection by providing the service account json file created above.
+    - Connect to a GitHub repository.
+    - Add / Update the following files:
+        - `dbt_project.yml`
+        - `models/modelflow/btc.sql`
+        - `models/modelflow/xau.sql`
+        - `models/modelflow/transformed_data.sql`
+    - Commit and push the changes.
+    - Navigate to "Deploy", and create an "Environment".
+    - Create a new "Job".
+    - Give the job a name.
+    - Select the Environment.
+    - Give the command
+
+        ```
+        dbt run --model transformed_data
+        ```
+    - Turn on Schedule for every hour.
+    - Create the job and run it.
+
 ---
 
 ## Results
@@ -203,6 +225,10 @@ This architecture enables scalable, real-time data processing, storage, and tran
     Bitcoin Prices Data
 
     ![bitcoin sample](./assets/bitcoin_price_sample.png)
+
+    DBT Transformed Data
+
+    ![transformed sample](./assets/transformed_data_sample.png)
 
 2. Regression models on historical data:
     |Model| RMSE | R² |
@@ -226,7 +252,9 @@ This architecture enables scalable, real-time data processing, storage, and tran
 2. [Coinbase: Get product candles](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductcandles)
 3. [PySpark](https://spark.apache.org/docs/latest/api/python/index.html#:~:text=PySpark%20is%20the%20Python%20API,for%20interactively%20analyzing%20your%20data.)
 4. [Use the BigQuery connector with Spark](https://cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example)
-5. [ChatGPT](https://chatgpt.com/)
+5. [Workflow scheduling solutions](https://cloud.google.com/dataproc/docs/concepts/workflows/workflow-schedule-solutions)
+6. [DBT Documentation](https://docs.getdbt.com/docs/build/documentation)
+7. [ChatGPT](https://chatgpt.com/)
 
 ---
 
