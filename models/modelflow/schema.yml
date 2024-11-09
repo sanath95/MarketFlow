@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+    - name: transformed_data
+      description: "Store calculated lag and moving average for both trading pairs"
+      columns:
+          - name: timestamp
+          - name: high
+          - name: lag
+          - name: moving_avg
+          - name: trading_pair
