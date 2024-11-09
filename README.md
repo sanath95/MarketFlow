@@ -226,6 +226,10 @@ This architecture enables scalable, real-time data processing, storage, and tran
 
     ![bitcoin sample](./assets/bitcoin_price_sample.png)
 
+    DBT Models
+
+    ![models](./assets/dbt_model.png)
+
     DBT Transformed Data
 
     ![transformed sample](./assets/transformed_data_sample.png)
