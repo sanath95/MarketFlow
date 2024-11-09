@@ -39,7 +39,9 @@ models:
   marketflowproject:
     # Applies to all files under models/example/
     modelflow:
+      transformed_data:
+        +materialized: table
       btc:
         +materialized: view
-      btc_transformed:
-        +materialized: table
+      xau:
+        +materialized: view
