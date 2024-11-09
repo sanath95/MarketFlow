@@ -93,8 +93,9 @@ This architecture enables scalable, real-time data processing, storage, and tran
     - Give the "Dataset ID".
     - Select region "europe-west3" and click "Create dataset".
     - Click on the kebab menu button next to the dataset id and select "Create table".
-    - Give the table a name for gold prices.
-    - Create another table for bitcoin prices.
+    - Give the table a name for gold prices data.
+    - Create another table for bitcoin prices data.
+    - Create another table for DBT transformed data.
 
 8. **ETL for historical data**
 
@@ -183,7 +184,11 @@ This architecture enables scalable, real-time data processing, storage, and tran
 
 10. **Data Transformation using DBT**
 
-    TODO
+    Navigate to "Service Accounts" and create a new service account to connect BigQuery to DBT.
+    - Give the service account a name.
+    - Select "Owner" role and click "Done".
+    - Click on the new service account, go to "Keys" tab, "Add Key", "Create a new key", "JSON".
+    - Download the service account keys as a json file.
 
 ---
 
@@ -204,7 +209,7 @@ This architecture enables scalable, real-time data processing, storage, and tran
     |---|---|---|
     |Linear Regression|2.42|0.99|
     |Random Forest Regressor|296.72|-2.05|
-    Linear Regression maybe overfit whereas the Random Forest Regressor is very underfit.
+    > Linear Regression maybe overfit whereas the Random Forest Regressor is very underfit.
 
 ---
 
