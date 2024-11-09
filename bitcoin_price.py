@@ -1,6 +1,6 @@
 from pyspark.context import SparkContext
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import from_unixtime
+from pyspark.sql.functions import from_unixtime, col
 import requests
 
 # Parse arguments
@@ -28,8 +28,15 @@ data_df = spark.createDataFrame(data['candles'])
 data_df = data_df.limit(1) # select only 1 datapoint per request
 
 # Perform data transformations
-data_df = data_df.withColumn('Timestamp', from_unixtime('start'))
+data_df = data_df.withColumn('timestamp', from_unixtime('start'))
 data_df = data_df.drop('start')
+# Convert column names to lower case
+for coll in data_df.columns:
+    if coll.lower()=="timestamp":
+        continue
+    else:
+        data_df = data_df.withColumn(coll, col(coll).cast("double"))
+    data_df = data_df.withColumnRenamed(coll, coll.lower())
 
 data_df.show()
 
